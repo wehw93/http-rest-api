@@ -1,6 +1,6 @@
 package apiserver
 
-import "github.com/gopherschool/http-rest-api/internal/app/store"
+import "github.com/wehw93/http-rest-api/internal/app/store"
 
 type Config struct {
 	BindAddr string `toml:"bind_addr"`
