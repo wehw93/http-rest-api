@@ -3,7 +3,7 @@ package apiserver
 type Config struct {
 	BindAddr    string `toml:"bind_addr"`
 	LogLevel    string `toml: "log_level"`
-	dataBaseURL string `toml: "database_url`
+	dataBaseURL string `toml: "database_url"`
 }
 
 func NewConfig() *Config {
