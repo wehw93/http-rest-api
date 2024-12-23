@@ -7,19 +7,31 @@ import (
 	"github.com/wehw93/http-rest-api/internal/app/model"
 	"github.com/wehw93/http-rest-api/internal/app/store"
 	"github.com/wehw93/http-rest-api/internal/app/store/sqlstore"
+	"github.com/wehw93/http-rest-api/internal/app/store/teststore"
 )
 
-func TestUserReposytoryCreate(t *testing.T) {
-	db, teardown := sqlstore.TestDB(t, database_url)
-	defer teardown("users")
-	s := sqlstore.New(db)
+func TestUserReposytory_Create(t *testing.T) {
+	s := teststore.New()
 	u := model.TestUser(t)
 	err := s.User().Create(u)
 	assert.NoError(t, err)
 	assert.NotNil(t, u)
 }
 
-func TestFindUserByEmail(t *testing.T) {
+func TestUserRepository_Find(t *testing.T) {
+	db, teardown := sqlstore.TestDB(t, database_url)
+	defer teardown("users")
+
+	s := sqlstore.New(db)
+	u := model.TestUser(t)
+
+	s.User().Create(u)
+	u, err := s.User().Find(u.ID)
+	assert.NoError(t, err)
+	assert.NotNil(t, u)
+}
+
+func TestUserRepository_FindUserByEmail(t *testing.T) {
 	db, teardown := sqlstore.TestDB(t, database_url)
 	defer teardown("users")
 
@@ -36,3 +48,4 @@ func TestFindUserByEmail(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, u)
 }
+

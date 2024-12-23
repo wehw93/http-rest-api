@@ -1,3 +1,4 @@
 bin_addr = "localhost:8080"
 log_level = "debug"
 database_url = "host=localhost dbname=restapi_dev user=postgres password=pwd123 sslmode=disable"
+sessiong_key = "123"
